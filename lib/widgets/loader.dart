@@ -12,9 +12,9 @@ Widget customLoader(){
           width: 50.w,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(80.sp),
-            color: AppColors.mainColor,
+            color: Colors.white,
           ),
-          child: const CircularProgressIndicator(color: Colors.white, ),
+          child: const CircularProgressIndicator(color: AppColors.mainColor, ),
         ),
       );
 }

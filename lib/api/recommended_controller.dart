@@ -11,6 +11,7 @@ class RecommendedProductController extends GetxController{
   List<ProductModel> recommendedProductist=[];
    CartController _cart = Get.find<CartController>();
   int _quantity = 0;
+  int get quantity => _quantity;
    bool isLoading=false;
   @override
   void onInit(){

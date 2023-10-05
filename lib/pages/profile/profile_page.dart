@@ -15,6 +15,7 @@ class ProfilePage extends StatelessWidget {
  bool fromProfile = true;
   @override
   Widget build(BuildContext context) {
+
    UserModel userModel=  Get.find<AuthController>().getUserInfo();
     Map<IconData, String> data ={
     Icons.person: userModel.name!,
@@ -37,7 +38,7 @@ class ProfilePage extends StatelessWidget {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            automaticallyImplyLeading: false,
+            //automaticallyImplyLeading: true,
             title: reuseableText('My Profile', color: Colors.white),
             centerTitle: true,
             backgroundColor: AppColors.mainColor,
@@ -53,7 +54,7 @@ class ProfilePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(200),
                   color: AppColors.mainColor
                 ),
-                child:const Icon(Icons.person)
+                child:const Icon(Icons.person, color: Colors.white, size: 80,)
                 ),
                 Expanded(
                   child: ListView.builder(

@@ -1,4 +1,3 @@
-import 'package:ecommerce_app1/constants/colors/constants.dart';
 import 'package:ecommerce_app1/pages/cart/controller.dart';
 import 'package:ecommerce_app1/pages/cart/widgets.dart';
 import 'package:ecommerce_app1/route/app_route.dart';
@@ -13,7 +12,6 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   var cartController= Get.find<CartController>().cartRepo.sharedPreferences.getStringList(AppConstants.Cart_History_List);
 
  
 

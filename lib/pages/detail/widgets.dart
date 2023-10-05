@@ -8,8 +8,88 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../api/controller.dart';
+import '../../api/recommended_controller.dart';
 
-Widget bottomBar(ProductModel product, PopularProductController controller) {
+Widget popularBottomBar(ProductModel product, PopularProductController controller) {
+  return  Container(
+      height: 80.h,
+      decoration: BoxDecoration(
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15.sp),
+              topRight: Radius.circular(15.sp))),
+      child: Container(
+        margin: EdgeInsets.only(left: 20.w, right: 20.w),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+                height: 50.h,
+                width: 110.w,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          controller.increment(false);
+                        },
+                        child: Icon(
+                          Icons.remove,
+                          size: 22.sp,
+                        )),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: reuseableText(controller.quantity.toString(),
+                          size: 22.sp),
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          controller.increment(true);
+                        },
+                        child: Icon(
+                          Icons.add,
+                          size: 22.sp,
+                        ))
+                  ],
+                )),
+            GestureDetector(
+              onTap: () {
+                if(controller.quantity!=0){
+                  controller.addToCart(product);
+                  Get.snackbar('Product Added', 'Product has beeen added to the cart',
+                  backgroundColor: AppColors.mainColor,colorText: Colors.white, );
+                }
+                
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: 50.h,
+                width: 190.w,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    reuseableText('\$${product.price!}',
+                        color: Colors.white, size: 22),
+                    reuseableText(' | Add to cart',
+                        size: 22, color: Colors.white),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  
+}
+Widget recommendedBottomBar(ProductModel product, RecommendedProductController controller) {
   return  Container(
       height: 80.h,
       decoration: BoxDecoration(
@@ -90,6 +170,36 @@ Widget bottomBar(ProductModel product, PopularProductController controller) {
 }
 
 Widget mainDetail(PopularProductController controller, ProductModel product) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      reuseableDetailText(product.name!),
+      SizedBox(
+        height: 10.h,
+      ),
+      Row(
+        children: [
+          Row(
+            children: List.generate(5, (index) {
+              return const Icon(
+                Icons.star,
+                color: Color.fromARGB(255, 243, 220, 14),
+              );
+            }),
+          ),
+          reuseableText('  {305 Reviews}', size: 20)
+        ],
+      ),
+      SizedBox(
+        height: 10.h,
+      ),
+      reuseableText('Description', size: 23),
+      reuseableText(product.description!, size: 18)
+    ],
+  );
+}
+
+Widget recommendedMainDetail(RecommendedProductController controller, ProductModel product) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [

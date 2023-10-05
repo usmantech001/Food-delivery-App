@@ -1,13 +1,10 @@
 
 import 'package:ecommerce_app1/constants/colors/app_colors.dart';
-import 'package:ecommerce_app1/pages/home/controller.dart';
 import 'package:ecommerce_app1/pages/home/widgets.dart';
 import 'package:ecommerce_app1/pages/signIn/sign_in_widget.dart';
 import 'package:ecommerce_app1/pages/welcome/widgets.dart';
-import 'package:ecommerce_app1/route/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

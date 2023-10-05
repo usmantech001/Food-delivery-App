@@ -1,6 +1,5 @@
 import 'package:ecommerce_app1/api/controller.dart';
 import 'package:ecommerce_app1/constants/colors/constants.dart';
-import 'package:ecommerce_app1/models/popular_product_model.dart';
 import 'package:ecommerce_app1/pages/cart/controller.dart';
 import 'package:ecommerce_app1/pages/detail/controller.dart';
 import 'package:ecommerce_app1/pages/detail/widgets.dart';
@@ -13,14 +12,14 @@ class DetailPage extends StatelessWidget{
  
   @override
   Widget build(BuildContext context) {
-    var product= Get.find<DetailController>().product;
+    var product= Get.arguments['product'];
    var popularProductController= Get.find<PopularProductController>();
    var detailController = Get.find<DetailController>();
    popularProductController.initialProduct(product, Get.find<CartController>());
     return GetBuilder<PopularProductController>(
       builder: (controller) {
         return Scaffold(
-          bottomNavigationBar: bottomBar(product, controller),
+          bottomNavigationBar: popularBottomBar(product, controller),
             
           body: Stack(
             children: [
@@ -28,7 +27,7 @@ class DetailPage extends StatelessWidget{
               CustomScrollView(
                 controller: detailController.scrollController,
                 shrinkWrap: true,
-                // physics:const NeverScrollableScrollPhysics(),
+                 physics:const AlwaysScrollableScrollPhysics(),
                 slivers:[
                   
                   SliverToBoxAdapter(

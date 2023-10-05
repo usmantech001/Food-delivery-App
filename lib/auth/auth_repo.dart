@@ -4,8 +4,6 @@ import 'package:ecommerce_app1/api/apiclient.dart';
 import 'package:ecommerce_app1/constants/colors/constants.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../models/login_model.dart';
 import '../models/sign_up_model.dart';
 
 class AuthRepo extends GetxService{
