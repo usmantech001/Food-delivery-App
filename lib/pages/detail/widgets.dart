@@ -1,6 +1,7 @@
 import 'package:ecommerce_app1/constants/colors/app_colors.dart';
 import 'package:ecommerce_app1/models/popular_product_model.dart';
 import 'package:ecommerce_app1/pages/cart/controller.dart';
+import 'package:ecommerce_app1/pages/favorite/fav_controller.dart';
 import 'package:ecommerce_app1/pages/signIn/sign_in_widget.dart';
 import 'package:ecommerce_app1/route/app_route.dart';
 import 'package:flutter/material.dart';
@@ -169,33 +170,44 @@ Widget recommendedBottomBar(ProductModel product, RecommendedProductController c
   
 }
 
-Widget mainDetail(PopularProductController controller, ProductModel product) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      reuseableDetailText(product.name!),
-      SizedBox(
-        height: 10.h,
-      ),
-      Row(
+Widget mainDetail(PopularProductController controller, ProductModel product, ) {
+  return GetBuilder<FavoriteController>(
+    builder: (favController) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: List.generate(5, (index) {
-              return const Icon(
-                Icons.star,
-                color: Color.fromARGB(255, 243, 220, 14),
-              );
-            }),
+          reuseableDetailText(product.name!),
+          SizedBox(
+            height: 10.h,
           ),
-          reuseableText('  {305 Reviews}', size: 20)
+          Row(
+            children: [
+              Row(
+                children: List.generate(5, (index) {
+                  return const Icon(
+                    Icons.star,
+                    color: Color.fromARGB(255, 243, 220, 14),
+                  );
+                }),
+              ),
+              reuseableText('  {305 Reviews}', size: 20),
+              Expanded(child: Container()),
+              GestureDetector(
+                onTap: () {
+                  favController.addToFavourite(product);
+                },
+                child:favController.isFavorite==true?Icon(Icons.favorite, size: 30.sp, color: Colors.red,):Icon(Icons.favorite_border, size: 30.sp,),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          reuseableText('Description', size: 23),
+          reuseableText(product.description!, size: 18)
         ],
-      ),
-      SizedBox(
-        height: 10.h,
-      ),
-      reuseableText('Description', size: 23),
-      reuseableText(product.description!, size: 18)
-    ],
+      );
+    }
   );
 }
 
@@ -282,12 +294,12 @@ Widget buildTopRow(CartController controller) {
                       
                       alignment: Alignment.center,
                       height: 20.h,
-                      width: 24.w,
+                      width: 20.w,
                       decoration: BoxDecoration(
                         color: AppColors.mainColor,
                         borderRadius: BorderRadius.circular(20.sp)
                       ),
-                      child: reuseableText(controller.itemLenght.toString(), color: Colors.white, size: 15.sp),
+                      child: reuseableText(controller.itemLenght.toString(), color: Colors.white, size: 13.sp),
                     ),
                   )
             ],

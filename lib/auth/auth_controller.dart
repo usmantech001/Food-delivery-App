@@ -22,6 +22,7 @@ class AuthController extends GetxController{
    Response response= await authRepo.registration(body);
    if(response.statusCode==200){
     //save user token
+     print(response.body['id']);
     authRepo.saveUserToken(response.body['token']);
     //save user info
     authRepo.saveUserInfo(body);
@@ -49,6 +50,7 @@ class AuthController extends GetxController{
    print(response.body["errors"]);
    if(response.statusCode==200){
     //save user token
+ // print('The id is' +response.body['id']);
     authRepo.saveUserToken(response.body['token']);
     responseModel = ResponseModel(isSuccess: true, message: response.body['token']);
     isLoading=false;

@@ -2,6 +2,7 @@ import 'package:ecommerce_app1/api/recommended_controller.dart';
 import 'package:ecommerce_app1/auth/auth_controller.dart';
 import 'package:ecommerce_app1/auth/auth_repo.dart';
 import 'package:ecommerce_app1/pages/cart/controller.dart';
+import 'package:ecommerce_app1/pages/favorite/fav_controller.dart';
 import 'package:ecommerce_app1/pages/welcome/controller.dart';
 import 'package:ecommerce_app1/route/app_route.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-   var cartCont=  Get.find<CartController>();
-  cartCont.getSavedData();
+   Get.find<CartController>().getSavedData();
+   Get.find<FavoriteController>().getSavedFavList();
+
         return GetBuilder<PopularProductController>(
           builder: (context) {
             return GetBuilder<RecommendedProductController>(

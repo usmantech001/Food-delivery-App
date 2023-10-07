@@ -1,6 +1,7 @@
 import 'package:ecommerce_app1/constants/colors/constants.dart';
 import 'package:ecommerce_app1/models/popular_product_model.dart';
 import 'package:ecommerce_app1/pages/cart/controller.dart';
+import 'package:ecommerce_app1/pages/favorite/fav_controller.dart';
 import 'package:get/get.dart';
 
 import 'repo.dart';
@@ -13,6 +14,7 @@ class PopularProductController extends GetxController{
   int _quantity = 0;
   int get quantity=> _quantity;
  CartController _cart = Get.find<CartController>();
+ FavoriteController _favoriteController = Get.find<FavoriteController>();
   bool isLoading=false;
   @override
   void onInit(){
@@ -51,10 +53,16 @@ class PopularProductController extends GetxController{
     }
     initialProduct(ProductModel product, CartController cart){
       _quantity=0 ;
+      _favoriteController.isFavorite=false;
       _cart=cart;
      var isExist = cart.existInCartItem(product);
       if(isExist==true){
         _quantity=_cart.getInCartQuantity(product);
+      }
+      var existInFavourite = _favoriteController.existInFavourite(product);
+      if(existInFavourite){
+        print(existInFavourite);
+        _favoriteController.isFavorite=true;
       }
    //   update();
     }

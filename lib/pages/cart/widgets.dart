@@ -1,6 +1,9 @@
 import 'package:ecommerce_app1/pages/cart/controller.dart';
+import 'package:ecommerce_app1/pages/payment/payment_page.dart';
+import 'package:ecommerce_app1/route/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import '../../constants/colors/app_colors.dart';
 import '../../constants/colors/constants.dart';
 import '../../models/cart_model.dart';
@@ -110,7 +113,7 @@ Widget cartContainer(CartModel item, CartController cartController) {
 }
 
 Widget bottomTab(CartController controller){
-  return Container(
+  return   Container(
     padding: EdgeInsets.symmetric(horizontal: 20.w),
      height: 80.h,
      decoration: BoxDecoration(
@@ -121,7 +124,7 @@ Widget bottomTab(CartController controller){
       color: Colors.grey.shade100,
 
      ),
-     child: Row(
+     child: controller.itemLenght==0?Container(): Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
@@ -137,6 +140,12 @@ Widget bottomTab(CartController controller){
           onTap: (){
            // controller.getCartHistory();
           //  print('pressed');
+          Get.toNamed(AppRoute.payment,
+           parameters: {
+            'id': 100127.toString(),
+            'userID': 28.toString()
+           }
+          );
           },
            child: Container(
            // height: ,

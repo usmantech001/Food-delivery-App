@@ -9,13 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../favorite/fav_controller.dart';
+
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
  bool fromProfile = true;
   @override
   Widget build(BuildContext context) {
-
    UserModel userModel=  Get.find<AuthController>().getUserInfo();
     Map<IconData, String> data ={
     Icons.person: userModel.name!,
@@ -39,6 +40,7 @@ class ProfilePage extends StatelessWidget {
           backgroundColor: Colors.white,
           appBar: AppBar(
             //automaticallyImplyLeading: true,
+            
             title: reuseableText('My Profile', color: Colors.white),
             centerTitle: true,
             backgroundColor: AppColors.mainColor,

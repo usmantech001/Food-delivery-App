@@ -1,9 +1,12 @@
+import 'package:ecommerce_app1/models/fav_model.dart';
+import 'package:ecommerce_app1/pages/favorite/fav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../constants/colors/constants.dart';
 import '../detail/widgets.dart';
 import '../signIn/sign_in_widget.dart';
 
-Widget favoriteContainer(){
+Widget favoriteContainer( FavoriteModel item){
   return Container(
       margin: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
       height: 120,
@@ -21,10 +24,10 @@ Widget favoriteContainer(){
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.sp),
                 color: Colors.white,
-                // image: DecorationImage(
-                //     fit: BoxFit.cover,
-                //     image: NetworkImage(
-                //         '${AppConstants.BASEURL}/uploads/${}'))
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                        '${AppConstants.BASEURL}/uploads/${item.img}'))
                 ),
           ),
           Expanded(
@@ -39,7 +42,7 @@ Widget favoriteContainer(){
                     children: [
                       Container(
                           width: 105,
-                          child: reuseableDetailText('rice', size: 22)),
+                          child: reuseableDetailText(item.name!, size: 22)),
                           Icon(Icons.cancel)
                     ],
                   ),
@@ -47,7 +50,7 @@ Widget favoriteContainer(){
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        reuseableText('\$2.00', size: 20.sp, color: Colors.deepPurple.shade800),
+                        reuseableText('\$ ${item.price}', size: 20.sp, color: Colors.deepPurple.shade800),
                        
                       ],
                     ),
