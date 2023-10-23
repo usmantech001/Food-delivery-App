@@ -1,10 +1,13 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecommerce_app1/api/controller.dart';
 import 'package:ecommerce_app1/api/recommended_controller.dart';
+import 'package:ecommerce_app1/constants/colors/app_colors.dart';
 import 'package:ecommerce_app1/constants/colors/constants.dart';
 import 'package:ecommerce_app1/pages/detail/widgets.dart';
 import 'package:ecommerce_app1/pages/home/controller.dart';
+import 'package:ecommerce_app1/pages/welcome/widgets.dart';
 import 'package:ecommerce_app1/route/app_route.dart';
+import 'package:ecommerce_app1/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -50,50 +53,7 @@ Widget barContainer(IconData icon) {
   );
 }
 
-Widget searchView() {
-  return Container(
-    margin: EdgeInsets.only(left: 20.w, right: 20.0.w, top: 10.h),
-    height: 50,
-    width: 393.w,
-    child: Row(
-      children: [
-        Container(
-          height: 40.h,
-          width: 280.w,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(15)),
-          child: const TextField(
-            keyboardType: TextInputType.multiline,
-            decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              hintText: 'Search your favorite',
-              hintStyle: TextStyle(color: Colors.black38),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                ),
-              ),
-            ),
-          ),
-        ),
-        Container(
-          height: 40.h,
-          width: 40.w,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.deepPurple),
-          child: Image.asset('images/filter.png'),
-        )
-      ],
-    ),
-  );
-}
+
 
 Widget buildHomePageView(
   BuildContext context,
@@ -103,10 +63,10 @@ Widget buildHomePageView(
     builder: (controller) {
       return GetBuilder<PopularProductController>(
         builder: (popularProductController) {
-          return  Column(
+          return popularProductController.isLoading?Center(child: customLoader()): Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 15.h),
+                  margin: EdgeInsets.only(top: 25.h),
                   height: 250,
                   child: PageView.builder(
                       controller: controller.pageController,
@@ -126,7 +86,7 @@ Widget buildHomePageView(
                                 margin: EdgeInsets.only(right: 20.w),
                                 height: 190,
                                 decoration: BoxDecoration(
-                                    color: index.isEven ? Colors.red : Colors.green,
+                                    color: Colors.grey.withOpacity(0.3),
                                     borderRadius: BorderRadius.circular(15),
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
@@ -148,8 +108,8 @@ Widget buildHomePageView(
                                       boxShadow: [
                                         BoxShadow(
                                             blurRadius: 1.w,
-                                            // spreadRadius: 1.w,
-                                            offset: Offset(5, 10),
+                                        
+                                            offset: Offset(5.w, 10.h),
                                             color: Colors.grey.shade200),
                                         BoxShadow(
                                           color: Colors.transparent,
@@ -159,8 +119,24 @@ Widget buildHomePageView(
                                         )
                                       ]),
                                   child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       reuseableDetailText(product.name!, size: 22),
+                                      SizedBox(height: 5.h,),
+                                      Row(
+                                        children: [
+                                          Row(
+                                            children: List.generate(product.stars!, (index) {
+                                              return Icon(Icons.star, color: AppColors.mainColor, size: 20.sp,);
+                                            }),
+                                          ),
+                                          SizedBox(width: 6.w,),
+                                          buildText('${product.stars} star', size: 18.0),
+                                         
+                                        ],
+                                      ),
+                                      SizedBox(height: 5.h,),
+                                       reuseableDetailText('\$ ${product.price}.00', size: 18.0)
 
                                     ],
                                   ),
@@ -175,9 +151,7 @@ Widget buildHomePageView(
                   padding: EdgeInsets.only(top: 5.h),
                   child: DotsIndicator(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    dotsCount: popularProductController.popularProductList.length == 0
-                        ? 5
-                        : popularProductController.popularProductList.length,
+                    dotsCount: popularProductController.popularProductList.length,
                     position: controller.currentIndex,
                     decorator: DotsDecorator(
                         activeColor: Colors.deepPurple,
@@ -206,22 +180,53 @@ Widget gridView() {
           var recommendedProduct = recommendedController.recommendedProductist[index];
           return GestureDetector(
             onTap: () {
-              Get.toNamed(AppRoute.recommendedDetailPage,
+              Get.toNamed(AppRoute.detail,
                             arguments: {'product': recommendedProduct});
             },
-            child: Container(
+            child: recommendedController.isLoading?Center(child: customLoader()): 
+            Container(
+              //height: 250,
               decoration: BoxDecoration(
-                  color: Colors.red, borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: NetworkImage('${AppConstants.BASEURL}/uploads/${recommendedProduct.img!}'),
-                    fit: BoxFit.cover
-                    )),
-                 
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(10.sp)
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    height: 150,
+                    decoration: BoxDecoration(
+                       // color: Colors.black, 
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10.sp),
+                          topRight: Radius.circular(10.sp)
+                        ),
+
+                        image: DecorationImage(
+                          image: NetworkImage('${AppConstants.BASEURL}/uploads/${recommendedProduct.img!}'),
+                          fit: BoxFit.cover
+                          )),
+                       
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 5.w, right: 5.w, top: 10.h, bottom: 10),
+                    //height: 50,
+                    width: double.maxFinite,
+                  // color: Colors.red,
+                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       reuseableDetailText(recommendedProduct.name!, size: 18.0),
+                       reuseableDetailText('\$ ${recommendedProduct.price}.00', size: 18.0)
+                     ],
+                   ),
+                  )
+                ],
+              ),
             ),
           );
         }),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15
+            crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15, childAspectRatio: 0.74
             //childAspectRatio:4
             ),
       );

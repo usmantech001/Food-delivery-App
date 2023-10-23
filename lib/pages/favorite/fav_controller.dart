@@ -1,3 +1,4 @@
+import 'package:ecommerce_app1/constants/colors/constants.dart';
 import 'package:ecommerce_app1/models/popular_product_model.dart';
 import 'package:ecommerce_app1/pages/favorite/fav_rep.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ Map<int, FavoriteModel> _favoriteItems={};
 Map<int, FavoriteModel> get favoriteItems => _favoriteItems={};
 List<FavoriteModel> storedFavItems = [];
 int itemLenght = 0;
+
   addToFavourite(ProductModel product){
     
    if(isFavorite==false){
@@ -24,7 +26,8 @@ int itemLenght = 0;
         name: product.name, 
         img: product.img,
         isExist: true, 
-        price: product.price, 
+        price: product.price,
+        product: product,
        
         );
         
@@ -37,7 +40,10 @@ int itemLenght = 0;
    } else if(_favoriteItems.containsKey(product.id)){
     removeFromFavourite(product);
     showSnackBar(title: 'Removed', text: 'Removed From favourite');
-     isFavorite=!isFavorite;
+    // isFavorite=!isFavorite;
+    getfavItems;
+   
+   
      update();
 
    }
@@ -47,6 +53,10 @@ int itemLenght = 0;
 
   removeFromFavourite(ProductModel product){
     _favoriteItems.remove(product.id);
+    isFavorite=!isFavorite;
+    getItemsLenght();
+    favouriteRepo.saveFavouriteItems(getfavItems);
+     getfavItems;
     update();
   }
   bool existInFavourite(ProductModel product){
@@ -65,7 +75,7 @@ int itemLenght = 0;
     List<FavoriteModel> get getfavItems{
       List<FavoriteModel>  favItems = [];
       _favoriteItems.forEach((key, value) {
-        favItems .add(value);
+        favItems.add(value);
       });
       return favItems;
     }
@@ -80,6 +90,7 @@ int itemLenght = 0;
     for(int i=0; i<storedFavItems.length; i++){
       _favoriteItems.putIfAbsent(storedFavItems[i].id!, () => storedFavItems[i]);
       getItemsLenght();
+     // getfavItems;
       update();
     }
   }

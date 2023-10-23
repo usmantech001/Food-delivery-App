@@ -1,5 +1,4 @@
-import 'package:ecommerce_app1/constants/colors/app_colors.dart';
-import 'package:ecommerce_app1/route/app_route.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controller.dart';
@@ -12,14 +11,14 @@ class BottomNavPage extends GetView<BottomNavController> {
    
     return Obx(
       ()=> Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+       /* floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           onPressed: (){
           Get.toNamed(AppRoute.cart);
         },
         backgroundColor: AppColors.mainColor,
         child: const Icon(Icons.shopping_basket, color: Colors.white,)
-        ),
+        ),*/
         body: controller.pages[controller.state.currentIndex.value],
         bottomNavigationBar:BottomNavigationBar(
          currentIndex: controller.state.currentIndex.value,

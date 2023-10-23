@@ -7,7 +7,6 @@ import 'package:ecommerce_app1/pages/detail/detail_page.dart';
 import 'package:ecommerce_app1/pages/favorite/favorite_page.dart';
 import 'package:ecommerce_app1/pages/payment/payment_page.dart';
 import 'package:ecommerce_app1/pages/recommended/binding.dart';
-import 'package:ecommerce_app1/pages/recommended/recomended_detail_page.dart';
 import 'package:ecommerce_app1/pages/signIn/sign_in_page.dart';
 import 'package:ecommerce_app1/pages/welcome/welcome_page.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ class AppRoute{
  static const String detail= '/detail';
  static const String cart= '/cart';
  static const String location= '/location';
- static const String recommendedDetailPage ='/recommendedDetailPage';
+ //static const String recommendedDetailPage ='/recommendedDetailPage';
  static const String payment= '/payment';
  static const String favorite = '/favorite';
 
@@ -72,36 +71,36 @@ class AppRoute{
       transition: Transition.rightToLeft,
       transitionDuration:const Duration(milliseconds: 300),
     ),
-      GetPage(
-      name: recommendedDetailPage, page:()=>const RecommendedDetailPage(),
-      curve: Curves.decelerate,
-      transition: Transition.rightToLeft,
-      transitionDuration:const Duration(milliseconds: 300),
-      binding: RecommendedDetailBinding()
-    ),
-     GetPage(
-      name: location, page:()=>const LocationPage(),
-      curve: Curves.decelerate,
-      transition: Transition.rightToLeft,
-      transitionDuration:const Duration(milliseconds: 300),
-    ),
+    //   GetPage(
+    //   name: recommendedDetailPage, page:()=>const RecommendedDetailPage(),
+    //   curve: Curves.decelerate,
+    //   transition: Transition.rightToLeft,
+    //   transitionDuration:const Duration(milliseconds: 300),
+    //   binding: RecommendedDetailBinding()
+    // ),
+    //  GetPage(
+    //   name: location, page:()=>const LocationPage(),
+    //   curve: Curves.decelerate,
+    //   transition: Transition.rightToLeft,
+    //   transitionDuration:const Duration(milliseconds: 300),
+    // ),
      GetPage(
       name: favorite, page:()=>const FavoritePage(),
       curve: Curves.decelerate,
       transition: Transition.rightToLeft,
       transitionDuration:const Duration(milliseconds: 300),
     ),
-     GetPage(
-      name: payment, page:()=> PaymentScreen(
-        orderModel: OrderModel(
-          id: int.parse(Get.parameters['id']!), 
-          userId: int.parse(Get.parameters['userID']!)
-          ),
+    //  GetPage(
+    //   name: payment, page:()=> PaymentScreen(
+    //     orderModel: OrderModel(
+    //       id: int.parse(Get.parameters['id']!), 
+    //       userId: int.parse(Get.parameters['userID']!)
+    //       ),
 
-      ),
-      curve: Curves.decelerate,
-      transition: Transition.rightToLeft,
-      transitionDuration:const Duration(milliseconds: 300),
-    ),
+    //   ),
+    //   curve: Curves.decelerate,
+    //   transition: Transition.rightToLeft,
+    //   transitionDuration:const Duration(milliseconds: 300),
+    // ),
   ];
 }

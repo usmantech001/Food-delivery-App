@@ -38,7 +38,7 @@ class AuthRepo extends GetxService{
  String getUserInfo() {
     String userInfo='';
     if(sharedPreferences.containsKey(AppConstants.SAVE_USER_INFO)){
-    userInfo=  sharedPreferences.getString(AppConstants.SAVE_USER_INFO)!;
+    userInfo=  sharedPreferences.getString(AppConstants.SAVE_USER_INFO)??'';
     }
     return userInfo;
   }

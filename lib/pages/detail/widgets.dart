@@ -7,6 +7,7 @@ import 'package:ecommerce_app1/route/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../api/controller.dart';
 import '../../api/recommended_controller.dart';
@@ -60,7 +61,7 @@ Widget popularBottomBar(ProductModel product, PopularProductController controlle
             GestureDetector(
               onTap: () {
                 if(controller.quantity!=0){
-                  controller.addToCart(product);
+                  controller.addToCart(product,);
                   Get.snackbar('Product Added', 'Product has beeen added to the cart',
                   backgroundColor: AppColors.mainColor,colorText: Colors.white, );
                 }
@@ -72,6 +73,7 @@ Widget popularBottomBar(ProductModel product, PopularProductController controlle
                 width: 190.w,
                 decoration: BoxDecoration(
                     color: Colors.deepPurple,
+                  
                     borderRadius: BorderRadius.circular(10)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -90,6 +92,7 @@ Widget popularBottomBar(ProductModel product, PopularProductController controlle
     );
   
 }
+/*
 Widget recommendedBottomBar(ProductModel product, RecommendedProductController controller) {
   return  Container(
       height: 80.h,
@@ -115,7 +118,7 @@ Widget recommendedBottomBar(ProductModel product, RecommendedProductController c
                   children: [
                     GestureDetector(
                         onTap: () {
-                          controller.increment(false);
+                        //  controller.increment(false);
                         },
                         child: Icon(
                           Icons.remove,
@@ -128,7 +131,7 @@ Widget recommendedBottomBar(ProductModel product, RecommendedProductController c
                     ),
                     GestureDetector(
                         onTap: () {
-                          controller.increment(true);
+                         // controller.increment(true);
                         },
                         child: Icon(
                           Icons.add,
@@ -139,7 +142,7 @@ Widget recommendedBottomBar(ProductModel product, RecommendedProductController c
             GestureDetector(
               onTap: () {
                 if(controller.quantity!=0){
-                  controller.addToCart(product);
+                  controller.addToCart(product, fromPopular: false);
                   Get.snackbar('Product Added', 'Product has beeen added to the cart',
                   backgroundColor: AppColors.mainColor,colorText: Colors.white, );
                 }
@@ -168,7 +171,7 @@ Widget recommendedBottomBar(ProductModel product, RecommendedProductController c
       ),
     );
   
-}
+}*/
 
 Widget mainDetail(PopularProductController controller, ProductModel product, ) {
   return GetBuilder<FavoriteController>(
@@ -261,13 +264,15 @@ Widget reuseableDetailText(String text,
   return Text(
     text,
     maxLines: 1,
-    style: TextStyle(
+    style:GoogleFonts.montserrat(
+      textStyle:  TextStyle(
       overflow: TextOverflow.ellipsis,
       color: color,
       fontSize: size,
       fontWeight: fontWeight,
       decoration: textdeco,
     ),
+    )
   );
 }
 

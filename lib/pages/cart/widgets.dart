@@ -27,88 +27,93 @@ Widget appIcon(IconData icon) {
 
 Widget cartContainer(CartModel item, CartController cartController) {
   
-  return  Container(
-      margin: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
-      height: 120,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.sp),
-        color: Colors.grey.shade100,
-      ),
-      child: Row(
-        children: [
-          Container(
-            height: 120.h,
-            width: 120.w,
-            margin: EdgeInsets.only(right: 10.w),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.sp),
-                color: Colors.white,
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                        '${AppConstants.BASEURL}/uploads/${item.img!}'))),
-          ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      width: 205,
-                      child: reuseableDetailText(item.name!, size: 22)),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        reuseableText('\$${item.price}.00', size: 20.sp, color: Colors.deepPurple.shade800),
-                        Container(
-                            height: 40.h,
-                            width: 70.w,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      
-                                      cartController.addToCart(item.product!, item.quantity!-1);
-                                    },
-                                    child: Icon(
-                                      Icons.remove,
-                                      size: 17.sp,
-                                    )),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: reuseableText(item.quantity.toString(),
-                                      size: 17.sp),
-                                ),
-                                GestureDetector(
-                                    onTap: () {
-                                      cartController.addToCart(item.product!, item.quantity!+1);
-                                    },
-                                    child: Icon(
-                                      Icons.add,
-                                      size: 17.sp,
-                                    ))
-                              ],
-                            )),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+  return  GestureDetector(
+    onTap: () {
+          Get.toNamed(AppRoute.detail, arguments: {'product': item.product});
+    },
+    child: Container(
+        margin: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
+        height: 120,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.sp),
+          color: Colors.grey.shade100,
+        ),
+        child: Row(
+          children: [
+            Container(
+              height: 120.h,
+              width: 120.w,
+              margin: EdgeInsets.only(right: 10.w),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.sp),
+                  color: Colors.white,
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                          '${AppConstants.BASEURL}/uploads/${item.img!}'))),
             ),
-          )
-        ],
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        width: 205,
+                        child: reuseableDetailText(item.name!, size: 22)),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          reuseableText('\$${item.price}.00', size: 20.sp, color: Colors.deepPurple.shade800),
+                          Container(
+                              height: 40.h,
+                              width: 70.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        
+                                        cartController.addToCart(item.product!, item.quantity!-1);
+                                      },
+                                      child: Icon(
+                                        Icons.remove,
+                                        size: 17.sp,
+                                      )),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(horizontal: 8.0),
+                                    child: reuseableText(item.quantity.toString(),
+                                        size: 17.sp),
+                                  ),
+                                  GestureDetector(
+                                      onTap: () {
+                                        cartController.addToCart(item.product!, item.quantity!+1);
+                                      },
+                                      child: Icon(
+                                        Icons.add,
+                                        size: 17.sp,
+                                      ))
+                                ],
+                              )),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
-    );
+  );
 
 }
 

@@ -1,6 +1,7 @@
 import 'package:ecommerce_app1/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget buildThirdParty(String image){
   return Container(
@@ -36,14 +37,17 @@ Widget buildThirdParty(String image){
 Widget reuseableText(String text, {double size=25, fontWeight= FontWeight.normal, color= Colors.black, textdeco=TextDecoration.none}){
   return Text(text,
  
-  style: TextStyle(
+  style: GoogleFonts.montserrat(
+    textStyle: TextStyle(
     
     color: color,
     fontSize: size,
     fontWeight: fontWeight,
     decoration: textdeco,
     
-  ),);
+  ),
+  )
+  );
 }
 
 Widget buildTextField(String text, IconData icon, TextEditingController controller, {String type=''}){

@@ -32,13 +32,16 @@ class HomePage extends StatelessWidget {
                                 buildText(userModel.name??'', size: 28.0, fontWeight: FontWeight.w400, color: AppColors.mainColor),
                               ],
                             ),
-                            buildText('What do you want from us today?', size: 15.0),
+                            buildText('What do you want from us today?', size: 18.0),
+
                           ],
                         ),
                       ),
                     ),
                     SliverToBoxAdapter(
-                      child:searchView()
+                      child: Container(
+                        margin: EdgeInsets.only(top: 25.h, left: 20.w),
+                        child: reuseableText('Popular food')),
                     ),
                     SliverToBoxAdapter(
                       child: buildHomePageView(context, ),

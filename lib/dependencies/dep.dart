@@ -12,6 +12,7 @@ import 'package:ecommerce_app1/pages/favorite/fav_rep.dart';
 import 'package:ecommerce_app1/pages/home/controller.dart';
 import 'package:ecommerce_app1/pages/location/location_controller.dart';
 import 'package:ecommerce_app1/pages/location/location_repo.dart';
+import 'package:ecommerce_app1/pages/search/controller/controller.dart';
 import 'package:ecommerce_app1/user/userRepo.dart';
 import 'package:ecommerce_app1/user/user_controller.dart';
 import 'package:get/get.dart';
@@ -42,7 +43,8 @@ Future<void> init() async{
   Get.lazyPut(() => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
   Get.lazyPut(() => UserController(userRepo: Get.find()));
   Get.lazyPut(() => UserRepo(apiClient: Get.find()));
-  Get.lazyPut(() => LocationController(locationrepo: Get.find(),), fenix: true);
+ // Get.lazyPut(() => LocationController(locationrepo: Get.find(),), fenix: true);
   Get.lazyPut(() => LocationRepo(locationApiClient: Get.find()));
   Get.lazyPut(() => DetailController(), fenix: true);
+  Get.lazyPut(() => SearchViewController(popularProductController: Get.find(), recommendedProductController: Get.find()),fenix: true);
 }

@@ -29,35 +29,30 @@ class RecommendedProductController extends GetxController{
     isLoading=false;
     update();
    }else{
-    print(response.statusCode);
    }
   }
 
-  increment(bool isIncrease){
-      if(isIncrease==true){
-        print('increment');
-        //quantity.value++;
-        _quantity++;
-      }else if(isIncrease==false&&_quantity!=0){
-        _quantity--;
-      }else if(_quantity<0){
-        _quantity=0;
-      }
-      update();
-    }
-    initialProduct(ProductModel product, CartController cart){
-      _quantity=0 ;
-      _cart=cart;
-     var isExist = cart.existInCartItem(product);
-      if(isExist==true){
-        _quantity=_cart.getInCartQuantity(product);
-      }
-   //   update();
-    }
+  // increment(bool isIncrease){
+  //     if(isIncrease==true){
+  //       _quantity++;
+  //     }else if(isIncrease==false&&_quantity!=0){
+  //       _quantity--;
+  //     }else if(_quantity<0){
+  //       _quantity=0;
+  //     }
+  //     update();
+  //   }
+    // initialProduct(ProductModel product, CartController cart){
+    //   _quantity=0 ;
+    //   _cart=cart;
+    //  var isExist = cart.existInCartItem(product);
+    //   if(isExist==true){
+    //     _quantity=_cart.getInCartQuantity(product);
+    //   } 
+    // }
 
-    addToCart(ProductModel product){
-      _cart.addToCart(product, _quantity);
-     // getItemsLenght();
-      update();
-    }
+    // addToCart(ProductModel product, {fromPopular=true}){
+    //   _cart.addToCart(product, _quantity, fromPopular: fromPopular);
+    //   update();
+    // }
 }

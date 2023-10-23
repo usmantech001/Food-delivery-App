@@ -77,7 +77,7 @@ class AuthController extends GetxController{
  UserModel getUserInfo() {
   UserModel _userModel;
   String userInfo=  authRepo.getUserInfo();
-  _userModel= UserModel.fromJson(jsonDecode(userInfo));
+ _userModel= UserModel.fromJson(jsonDecode(userInfo));
   return _userModel;
   }
 }

@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../favorite/fav_controller.dart';
-
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
@@ -35,7 +33,6 @@ class ProfilePage extends StatelessWidget {
     return GetBuilder<AuthController>(
       builder: (userController) {
         //usercontroller
-        print(userModel.name);
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -66,7 +63,7 @@ class ProfilePage extends StatelessWidget {
                       onTap: (){
                         Get.find<UserController>().getUserInfo();
                         if(icons[index]==Icons.location_on){
-                            Get.toNamed(AppRoute.location);
+                           // Get.toNamed(AppRoute.location);
                         }
                         if(icons[index]==Icons.logout){
                           Get.defaultDialog(

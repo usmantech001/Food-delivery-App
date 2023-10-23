@@ -40,9 +40,10 @@ dependencies:
   dots_indicator: ^3.0.0
   shared_preferences: ^2.2.1
   google_maps_flutter: ^2.5.0
-  geocoding: ^2.1.0
-  geolocator: ^10.1.0
-  webview_flutter: ^2.0.9
+  google_fonts: ^6.1.0
+  # geocoding: ^2.1.0
+  # geolocator: ^10.1.0
+  # webview_flutter: ^2.0.9
   
 
 dev_dependencies:

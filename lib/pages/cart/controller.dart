@@ -14,7 +14,7 @@ class CartController extends GetxController{
   List<CartModel> cartItems =[];
   List<CartModel> storageItems=[];
 
-  addToCart(ProductModel product, quantity){
+  addToCart(ProductModel product, quantity, {fromPopular=true}){
        
       if(quantity<=0){
         print(' the quantity is null');
@@ -35,7 +35,8 @@ class CartController extends GetxController{
             price: value.price, 
             quantity: quantity, 
             time: DateTime.now().toString(),
-            product: product
+            product: product,
+            fromPopular:fromPopular
             );
             
             
@@ -54,7 +55,8 @@ class CartController extends GetxController{
           price: product.price, 
           quantity: quantity, 
           time: DateTime.now().toString(),
-          product: product
+          product: product,
+          fromPopular:fromPopular
           );
        });
         getItemsLenght();

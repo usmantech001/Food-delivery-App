@@ -2,8 +2,10 @@ import 'package:ecommerce_app1/pages/favorite/favorite_page.dart';
 import 'package:ecommerce_app1/pages/home/home_page.dart';
 import 'package:ecommerce_app1/pages/order/order_page.dart';
 import 'package:ecommerce_app1/pages/profile/profile_page.dart';
+import 'package:ecommerce_app1/pages/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 
 import 'state.dart';
 
@@ -18,6 +20,7 @@ class BottomNavController extends GetxController{
   super.onInit();
   bottomNav = const[
     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
+     BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
     BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'favorite'),
     BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: 'order'),
     BottomNavigationBarItem(icon: Icon(Icons.person_outline_outlined), label: 'Profile')
@@ -25,6 +28,7 @@ class BottomNavController extends GetxController{
 
   pages= [
    const HomePage(),
+   const SearchPage(),
     const FavoritePage(),
    const OrderPage(),
     ProfilePage()

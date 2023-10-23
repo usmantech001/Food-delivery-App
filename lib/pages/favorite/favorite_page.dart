@@ -10,11 +10,8 @@ class FavoritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   // print(Get.find<FavoriteController>().favoriteItems.length);
     return GetBuilder<FavoriteController>(
       builder: (favController) {
-        print(favController.itemLenght);
-        print('The cartmodel lenght is' + favController.getfavItems.length.toString());
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: true,
@@ -24,17 +21,19 @@ class FavoritePage extends StatelessWidget {
             backgroundColor: Colors.white,
             shadowColor: Colors.white,
           ),
-          body:CustomScrollView(
+          body:favController.getfavItems.isEmpty?Container(
+             alignment: Alignment.center,
+            child: reuseableText('Your favourite is empty'),): CustomScrollView(
                         slivers: [
                           SliverPadding(
                             padding: EdgeInsets.only(left: 0.w, right: 0.w, top: 0),
                             sliver: SliverList(
                                 delegate: SliverChildBuilderDelegate(
-                                  childCount: favController.itemLenght,
+                                  childCount: favController.getfavItems.length,
                                     (context, index) {
                                       var item = favController.getfavItems[index];
                                      
-                              return favoriteContainer(item);
+                              return favoriteContainer(item, favController);
                             })),
                           )
                         ],

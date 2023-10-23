@@ -67,8 +67,8 @@ class PopularProductController extends GetxController{
    //   update();
     }
 
-    addToCart(ProductModel product){
-      _cart.addToCart(product, _quantity);
+    addToCart(ProductModel product , {fromPopular=true}){
+      _cart.addToCart(product, _quantity, fromPopular: fromPopular);
      // getItemsLenght();
       update();
     }
